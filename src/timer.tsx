@@ -1,26 +1,21 @@
-import React from "react"
-export class Timer extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            count: props.count
-        }
-    }
-    countDown() {
+import React, { useState } from "react"
+
+export const Timer = ( {count}: any) => {
+    const [num, setCount] = useState(count);
+    const countDown = () => {
         const timer = setInterval(() => {
-            if(this.state.count <= 0 ) {
-                clearInterval(timer)
-                alert('Time is out')
+            if(num <= 0) {
+                clearTimeout(timer)
             }
-            this.setState({...this.state, count: --this.state.count})
+            setCount( num-1 )
         }, 1000);
     }
-    render() {
-        return (
-            <div>
-            <h1>Hello Timer</h1>
-            <h3> {this.state.count} left</h3>
-            </div>
-        )
-    }
+    countDown()
+    
+    return (
+        <div>
+        <h1>Hello Timer</h1>
+        <h3> {num} left</h3>
+        </div>
+    )
 }
